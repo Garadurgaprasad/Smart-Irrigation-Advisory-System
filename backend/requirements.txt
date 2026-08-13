@@ -11,3 +11,4 @@ plotly
 requests
 bcrypt
 pytest
+firebase-functions>=0.1.0
