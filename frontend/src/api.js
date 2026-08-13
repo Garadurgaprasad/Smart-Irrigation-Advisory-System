@@ -113,6 +113,41 @@ const getRecommendation = async (fieldId) => {
   return res.data;
 };
 
+const calculateAdvisory = async (params) => {
+  const res = await apiClient.post('/api/advisory/calculate', params);
+  return res.data;
+};
+
+const getDetailedAdvisory = async (fieldId) => {
+  const res = await apiClient.get(`/api/advisory/fields/${fieldId}/detailed`);
+  return res.data;
+};
+
+const getAllFieldsAdvisory = async () => {
+  const res = await apiClient.get('/api/advisory/all-fields');
+  return res.data;
+};
+
+const getAdvisoryCrops = async () => {
+  const res = await apiClient.get('/api/advisory/crops');
+  return res.data;
+};
+
+const getAdvisorySoils = async () => {
+  const res = await apiClient.get('/api/advisory/soils');
+  return res.data;
+};
+
+const getAdvisoryMethods = async () => {
+  const res = await apiClient.get('/api/advisory/methods');
+  return res.data;
+};
+
+const getAdvisorySchedule = async (fieldId) => {
+  const res = await apiClient.get(`/api/advisory/schedule/${fieldId}`);
+  return res.data;
+};
+
 // ── Irrigation Logging ────────────────────────────────────────────────
 
 const logIrrigation = async (fieldId, data) => {
@@ -193,6 +228,13 @@ export default {
   getMoistureHistory,
   getWeather,
   getRecommendation,
+  calculateAdvisory,
+  getDetailedAdvisory,
+  getAllFieldsAdvisory,
+  getAdvisoryCrops,
+  getAdvisorySoils,
+  getAdvisoryMethods,
+  getAdvisorySchedule,
   logIrrigation,
   getIrrigationLogs,
   getWaterUsage,

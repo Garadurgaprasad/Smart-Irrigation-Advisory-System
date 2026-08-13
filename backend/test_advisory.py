@@ -221,6 +221,84 @@ class TestMoistureTrend:
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# ADVANCED AGRONOMIC ENGINE TESTS
+# ═══════════════════════════════════════════════════════════════════════
+
+class TestAdvancedAgronomics:
+    """Tests for FAO-56 Kc, ET0, Effective Rain, Pump Run-time & 7-Day Schedule."""
+
+    def test_et0_calculation(self):
+        from advisory_engine import calculate_et0
+        et0_hot = calculate_et0(temperature_c=38.0, humidity_percent=40.0, wind_speed_kmh=15.0)
+        et0_cool = calculate_et0(temperature_c=22.0, humidity_percent=75.0, wind_speed_kmh=5.0)
+        assert et0_hot > et0_cool
+        assert 1.5 <= et0_hot <= 12.0
+        assert 1.5 <= et0_cool <= 12.0
+
+    def test_effective_rainfall_low_prob(self):
+        from advisory_engine import calculate_effective_rainfall
+        peff = calculate_effective_rainfall(rain_probability_percent=15, expected_rainfall_mm=10.0)
+        assert peff == 0.0
+
+    def test_effective_rainfall_high_prob(self):
+        from advisory_engine import calculate_effective_rainfall
+        peff = calculate_effective_rainfall(rain_probability_percent=80, expected_rainfall_mm=20.0)
+        assert peff > 0.0
+        assert peff <= 20.0
+
+    def test_pump_runtime_calculation(self):
+        from advisory_engine import calculate_pump_runtime
+        res_zero = calculate_pump_runtime(0)
+        assert res_zero["total_minutes"] == 0
+        assert res_zero["hours"] == 0
+
+        # 5 HP pump (~900 L/min) -> 54,000 Litres should take ~60 min (1 hour)
+        res_54k = calculate_pump_runtime(54000, pump_hp=5.0)
+        assert 50 <= res_54k["total_minutes"] <= 70
+        assert res_54k["energy_kwh"] > 0
+
+    def test_7day_schedule_generation(self):
+        from advisory_engine import generate_7day_schedule
+        schedule = generate_7day_schedule(
+            crop_type="Rice",
+            growth_stage="Vegetative",
+            initial_moisture_pct=35.0,
+            soil_type="Clay Loam",
+            irrigation_method="Drip",
+            field_area_acres=2.0,
+            pump_hp=5.0,
+        )
+        assert len(schedule) == 7
+        assert schedule[0]["day"] == 1
+        assert "projected_moisture_pct" in schedule[0]
+        assert "action" in schedule[0]
+
+    def test_soil_and_irrigation_constants(self):
+        from advisory_engine import SOIL_CHARACTERISTICS, IRRIGATION_METHODS
+        assert "Clay Loam" in SOIL_CHARACTERISTICS
+        assert "Sandy Loam" in SOIL_CHARACTERISTICS
+        assert "Drip" in IRRIGATION_METHODS
+        assert IRRIGATION_METHODS["Drip"]["efficiency"] == 0.90
+        assert IRRIGATION_METHODS["Flood"]["efficiency"] == 0.50
+
+    def test_multilingual_bulletin_structure(self):
+        rule = lookup_crop_rule("Chili", "Flowering")
+        rec = get_recommendation(
+            moisture_percent=30.0,
+            crop_stage_rule=rule,
+            rain_probability_percent=10,
+            expected_rainfall_mm=0,
+            field_area_acres=1.5,
+            irrigation_method="Drip",
+        )
+        assert "bulletins" in rec
+        assert "en" in rec["bulletins"]
+        assert "hi" in rec["bulletins"]
+        assert "te" in rec["bulletins"]
+        assert "Chili" in rec["bulletins"]["en"]
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # RUN
 # ═══════════════════════════════════════════════════════════════════════
 

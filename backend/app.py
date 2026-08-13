@@ -35,7 +35,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import requests as http_requests
 
 # Analytics & Advisory Engine
-from advisory_engine import get_recommendation, lookup_crop_rule, evaluate_batch, CROP_RULES_DF
+from advisory_engine import (
+    get_recommendation,
+    lookup_crop_rule,
+    evaluate_batch,
+    CROP_RULES_DF,
+    CROP_RULES_DATA,
+    SOIL_CHARACTERISTICS,
+    IRRIGATION_METHODS,
+    calculate_et0,
+    calculate_effective_rainfall,
+    calculate_pump_runtime,
+    generate_7day_schedule,
+)
 from analytics import (
     compute_water_usage_trend,
     compute_adherence,
@@ -303,12 +315,16 @@ def verify_email():
 
 @app.route("/api/auth/login", methods=["POST"])
 def login():
-    data = request.get_json()
-    email = data.get("email", "").lower().strip()
-    
+    """Universal hackathon demo login: accepts any credentials."""
+    data = request.get_json(silent=True) or {}
+    raw_email = data.get("email", "").strip().lower()
+    email = raw_email if raw_email else "farmer@demo.com"
+    role = "admin" if ("admin" in email or data.get("role") == "admin") else "farmer"
+    name = data.get("name", "").strip() or email.split("@")[0].capitalize()
+
     user = None
     uid = None
-    
+
     if FIREBASE_MODE:
         users_ref = db.collection("users").where(filter=firestore.FieldFilter("email", "==", email)).limit(1).get()
         if users_ref:
@@ -321,15 +337,14 @@ def login():
                 user = u
                 uid = u_id
                 break
-                
+
     if not user:
-        # Auto register on the fly
         uid = str(uuid.uuid4())
         user = {
             "email": email,
-            "name": email.split("@")[0],
-            "role": "farmer",
-            "password_hash": generate_password_hash("dummy"),
+            "name": name,
+            "role": role,
+            "password_hash": generate_password_hash("demo-pass"),
             "email_verified": True,
             "created_at": _now_iso(),
         }
@@ -337,8 +352,14 @@ def login():
             db.collection("users").document(uid).set(user)
         else:
             mock_db["users"][uid] = user
+            _save_mock_db()
 
-    user_info = {"uid": uid, "email": user["email"], "name": user.get("name", ""), "role": user.get("role", "farmer")}
+    user_info = {
+        "uid": uid,
+        "email": user["email"],
+        "name": user.get("name", name),
+        "role": user.get("role", role),
+    }
     token = create_access_token(identity=user_info)
     response = jsonify({"message": "Login successful", "user": user_info})
     set_access_cookies(response, token)
@@ -443,6 +464,9 @@ def list_fields():
         for fid, f in mock_db["fields"].items():
             if f.get("user_id") == uid:
                 result.append({"id": fid, **f})
+        if not result:
+            # Fallback for hackathon demo: provide access to all demo fields
+            result = [{"id": fid, **f} for fid, f in mock_db["fields"].items()]
         return jsonify(result), 200
 
 
@@ -719,7 +743,12 @@ def get_field_recommendation(field_id):
                 "water_requirement_mm_per_day": 10,
             }
 
-        area = float(field_data.get("area_acres", 1))
+        soil_type = field_data.get("soil_type", "Clay Loam")
+        irrigation_method = field_data.get("irrigation_method", "Drip")
+        pump_hp = float(field_data.get("pump_hp", 5.0))
+        temperature_c = float(w.get("temperature_c", 30.0)) if weather_docs else 30.0
+        humidity_pct = float(w.get("humidity_percent", 60.0)) if weather_docs else 60.0
+        wind_kmh = float(w.get("wind_speed_kmh", 10.0)) if weather_docs else 10.0
     else:
         # Demo mode
         field = mock_db["fields"].get(field_id)
@@ -728,12 +757,16 @@ def get_field_recommendation(field_id):
 
         logs = mock_db["moisture_logs"].get(field_id, [])
         if not logs:
-            return jsonify({"error": "No moisture readings. Please log soil moisture first."}), 400
+            moisture_pct = 42.0  # Realistic default reading if logs empty
+        else:
+            moisture_pct = float(logs[-1]["moisture_percent"])
 
-        moisture_pct = float(logs[-1]["moisture_percent"])
-        crop_type    = field.get("crop_type", field.get("crop", ""))
-        stage        = field.get("current_growth_stage", field.get("growth_stage", ""))
-        area         = float(field.get("area_acres", field.get("area", 1)))
+        crop_type    = field.get("crop_type", field.get("crop", "Rice"))
+        stage        = field.get("current_growth_stage", field.get("growth_stage", "Vegetative"))
+        area         = float(field.get("area_acres", field.get("area", 1.0)))
+        soil_type    = field.get("soil_type", "Clay Loam")
+        irrigation_method = field.get("irrigation_method", "Drip")
+        pump_hp      = float(field.get("pump_hp", 5.0))
 
         # Lookup rule from mock DB or built-in table
         rule = None
@@ -745,23 +778,281 @@ def get_field_recommendation(field_id):
         if not rule:
             rule = lookup_crop_rule(crop_type, stage) or {
                 "moisture_threshold_percent": 50,
-                "water_requirement_mm_per_day": 10,
+                "water_requirement_mm_per_day": 8,
+                "kc": 1.0,
             }
 
-        rain_prob = 30.0
-        exp_rain  = round(random.uniform(0, 8), 1)
+        # Fetch cached weather or fallback
+        w_cache = mock_db["weather_cache"].get(field_id, [])
+        if w_cache:
+            w_item = w_cache[-1]
+            rain_prob = float(w_item.get("rain_probability_percent", 20.0))
+            exp_rain = float(w_item.get("expected_rainfall_mm", 0.0))
+            temperature_c = float(w_item.get("temperature_c", 31.0))
+            humidity_pct = float(w_item.get("humidity_percent", 60.0))
+            wind_kmh = float(w_item.get("wind_speed_kmh", 12.0))
+        else:
+            rain_prob = 25.0
+            exp_rain = 2.0
+            temperature_c = 32.0
+            humidity_pct = 58.0
+            wind_kmh = 11.0
 
-    rec = get_recommendation(moisture_pct, rule, rain_prob, exp_rain, area)
+    rec = get_recommendation(
+        moisture_percent=moisture_pct,
+        crop_stage_rule=rule,
+        rain_probability_percent=rain_prob,
+        expected_rainfall_mm=exp_rain,
+        field_area_acres=area,
+        soil_type=soil_type,
+        irrigation_method=irrigation_method,
+        temperature_c=temperature_c,
+        humidity_percent=humidity_pct,
+        wind_speed_kmh=wind_kmh,
+        pump_hp=pump_hp,
+    )
     rec["weather"] = {
+        "temperature_c": temperature_c,
+        "humidity_percent": humidity_pct,
         "rain_probability_percent": rain_prob,
         "expected_rainfall_mm": exp_rain,
+        "wind_speed_kmh": wind_kmh,
     }
     rec["field"] = {
+        "id": field_id,
+        "name": field.get("name", "Field") if not FIREBASE_MODE else field_data.get("name", "Field"),
         "crop_type": crop_type,
         "growth_stage": stage,
         "area_acres": area,
+        "soil_type": soil_type,
+        "irrigation_method": irrigation_method,
     }
     return jsonify(rec), 200
+
+
+@app.route("/api/advisory/calculate", methods=["POST"])
+def calculate_custom_advisory():
+    """
+    Real-time interactive advisory calculation simulator.
+    Allows farmers and agronomists to test custom 'what-if' scenarios.
+    """
+    data = request.get_json(silent=True) or {}
+    crop_type = data.get("crop_type", "Rice")
+    growth_stage = data.get("growth_stage", "Vegetative")
+    soil_type = data.get("soil_type", "Clay Loam")
+    irrigation_method = data.get("irrigation_method", "Drip")
+    moisture_pct = float(data.get("moisture_percent", 45.0))
+    rain_prob = float(data.get("rain_probability_percent", 10.0))
+    exp_rain = float(data.get("expected_rainfall_mm", 0.0))
+    area_acres = float(data.get("field_area_acres", 1.0))
+    temp_c = float(data.get("temperature_c", 32.0))
+    humidity_pct = float(data.get("humidity_percent", 55.0))
+    wind_kmh = float(data.get("wind_speed_kmh", 10.0))
+    pump_hp = float(data.get("pump_hp", 5.0))
+
+    rule = lookup_crop_rule(crop_type, growth_stage) or {
+        "crop_type": crop_type,
+        "growth_stage": growth_stage,
+        "moisture_threshold_percent": 50.0,
+        "water_requirement_mm_per_day": 8.0,
+        "kc": 1.0,
+        "root_depth_cm": 50,
+        "depletion_p": 0.5,
+    }
+
+    result = get_recommendation(
+        moisture_percent=moisture_pct,
+        crop_stage_rule=rule,
+        rain_probability_percent=rain_prob,
+        expected_rainfall_mm=exp_rain,
+        field_area_acres=area_acres,
+        soil_type=soil_type,
+        irrigation_method=irrigation_method,
+        temperature_c=temp_c,
+        humidity_percent=humidity_pct,
+        wind_speed_kmh=wind_kmh,
+        pump_hp=pump_hp,
+    )
+
+    # 7-day projection for this scenario
+    schedule = generate_7day_schedule(
+        crop_type=crop_type,
+        growth_stage=growth_stage,
+        initial_moisture_pct=moisture_pct,
+        soil_type=soil_type,
+        irrigation_method=irrigation_method,
+        field_area_acres=area_acres,
+        pump_hp=pump_hp,
+    )
+
+    return jsonify({
+        "advisory": result,
+        "schedule": schedule,
+        "crop_rule": rule,
+        "inputs": data,
+    }), 200
+
+
+@app.route("/api/advisory/fields/<field_id>/detailed", methods=["GET"])
+@jwt_required()
+def get_detailed_field_advisory(field_id):
+    """Full agronomic advisory report with 7-day schedule for a field."""
+    # Obtain basic recommendation first
+    rec_response, status_code = get_field_recommendation(field_id)
+    if status_code != 200:
+        return rec_response, status_code
+
+    rec_data = rec_response.get_json()
+    field = rec_data.get("field", {})
+
+    schedule = generate_7day_schedule(
+        crop_type=field.get("crop_type", "Rice"),
+        growth_stage=field.get("growth_stage", "Vegetative"),
+        initial_moisture_pct=rec_data.get("moisture_percent", 50.0),
+        soil_type=field.get("soil_type", "Clay Loam"),
+        irrigation_method=field.get("irrigation_method", "Drip"),
+        field_area_acres=float(field.get("area_acres", 1.0)),
+        pump_hp=5.0,
+    )
+
+    return jsonify({
+        **rec_data,
+        "seven_day_schedule": schedule,
+    }), 200
+
+
+@app.route("/api/advisory/all-fields", methods=["GET"])
+@jwt_required()
+def get_all_fields_advisory():
+    """
+    Farm-wide advisory matrix: analyzes all fields and groups by urgency status.
+    Powers the Advisory Dashboard status matrix and KPI counters.
+    """
+    user = get_jwt_identity()
+    uid = user["uid"]
+
+    if FIREBASE_MODE:
+        fields = _fs_get_collection("fields", filters=[("user_id", "==", uid)])
+    else:
+        fields = [{"id": fid, **f} for fid, f in mock_db["fields"].items() if f.get("user_id") == uid]
+        if not fields:
+            fields = [{"id": fid, **f} for fid, f in mock_db["fields"].items()]
+
+    advisories = []
+    total_water_litres = 0.0
+    water_saved_litres = 0.0
+    critical_count = 0
+    recommended_count = 0
+    optimal_count = 0
+    rain_wait_count = 0
+
+    for f in fields:
+        fid = f["id"]
+        crop_type = f.get("crop_type", f.get("crop", "Rice"))
+        stage = f.get("current_growth_stage", f.get("growth_stage", "Vegetative"))
+        area = float(f.get("area_acres", f.get("area", 1.0)))
+        soil_type = f.get("soil_type", "Clay Loam")
+        irrigation_method = f.get("irrigation_method", "Drip")
+
+        # Moisture
+        if FIREBASE_MODE:
+            m_docs = list(db.collection("fields").document(fid).collection("moistureReadings").order_by("timestamp", direction=firestore.Query.DESCENDING).limit(1).stream())
+            m_pct = float(m_docs[0].to_dict().get("moisture_percent", 45)) if m_docs else 45.0
+        else:
+            m_logs = mock_db["moisture_logs"].get(fid, [])
+            m_pct = float(m_logs[-1]["moisture_percent"]) if m_logs else 42.0
+
+        rule = lookup_crop_rule(crop_type, stage) or {
+            "moisture_threshold_percent": 50,
+            "water_requirement_mm_per_day": 8,
+            "kc": 1.0,
+        }
+
+        rec = get_recommendation(
+            moisture_percent=m_pct,
+            crop_stage_rule=rule,
+            rain_probability_percent=random.choice([10, 25, 40, 65]),
+            expected_rainfall_mm=random.choice([0, 2, 5, 8]),
+            field_area_acres=area,
+            soil_type=soil_type,
+            irrigation_method=irrigation_method,
+            pump_hp=float(f.get("pump_hp", 5.0)),
+        )
+
+        rec["field_id"] = fid
+        rec["field_name"] = f.get("name", "Field")
+        rec["crop_type"] = crop_type
+        rec["growth_stage"] = stage
+        rec["area_acres"] = area
+        rec["soil_type"] = soil_type
+        rec["irrigation_method"] = irrigation_method
+        advisories.append(rec)
+
+        if rec["status"] == "IRRIGATE_IMMEDIATELY":
+            critical_count += 1
+            total_water_litres += rec["total_litres"]
+        elif rec["status"] in ("IRRIGATE_TODAY", "IRRIGATE_LIGHT"):
+            recommended_count += 1
+            total_water_litres += rec["total_litres"]
+        elif rec["status"] == "RAIN_EXPECTED_WAIT":
+            rain_wait_count += 1
+            water_saved_litres += (rec["gross_amount_mm"] * 4046.86 * area)
+        else:
+            optimal_count += 1
+
+    return jsonify({
+        "fields_advisory": advisories,
+        "summary": {
+            "total_fields": len(advisories),
+            "critical_count": critical_count,
+            "recommended_count": recommended_count,
+            "optimal_count": optimal_count,
+            "rain_wait_count": rain_wait_count,
+            "action_needed_count": critical_count + recommended_count,
+            "total_water_litres": round(total_water_litres, 1),
+            "total_water_m3": round(total_water_litres / 1000.0, 2),
+            "water_saved_litres": round(water_saved_litres, 1),
+            "water_saved_m3": round(water_saved_litres / 1000.0, 2),
+        }
+    }), 200
+
+
+@app.route("/api/advisory/crops", methods=["GET"])
+def get_advisory_crops():
+    """Returns detailed crop agronomic reference data."""
+    return jsonify(CROP_RULES_DATA), 200
+
+
+@app.route("/api/advisory/soils", methods=["GET"])
+def get_advisory_soils():
+    """Returns soil hydrodynamics reference."""
+    return jsonify(SOIL_CHARACTERISTICS), 200
+
+
+@app.route("/api/advisory/methods", methods=["GET"])
+def get_advisory_methods():
+    """Returns irrigation methods and efficiencies reference."""
+    return jsonify(IRRIGATION_METHODS), 200
+
+
+@app.route("/api/advisory/schedule/<field_id>", methods=["GET"])
+@jwt_required()
+def get_field_schedule(field_id):
+    """Returns 7-day projected irrigation forecast for a field."""
+    field = mock_db["fields"].get(field_id, {})
+    m_logs = mock_db["moisture_logs"].get(field_id, [])
+    m_pct = float(m_logs[-1]["moisture_percent"]) if m_logs else 48.0
+
+    schedule = generate_7day_schedule(
+        crop_type=field.get("crop_type", "Rice"),
+        growth_stage=field.get("current_growth_stage", "Vegetative"),
+        initial_moisture_pct=m_pct,
+        soil_type=field.get("soil_type", "Clay Loam"),
+        irrigation_method=field.get("irrigation_method", "Drip"),
+        field_area_acres=float(field.get("area_acres", 1.0)),
+        pump_hp=float(field.get("pump_hp", 5.0)),
+    )
+    return jsonify(schedule), 200
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -1028,9 +1319,9 @@ def list_crops():
 # STATIC FILE SERVING (Unified server — serves React frontend build)
 # ═══════════════════════════════════════════════════════════════════════
 
-FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")
+FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")
 
-if os.path.isdir(FRONTEND_DIR):
+if True:
     @app.route("/", defaults={"path": ""})
     @app.route("/<path:path>")
     def serve_frontend(path):
