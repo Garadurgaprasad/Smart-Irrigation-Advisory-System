@@ -14,16 +14,11 @@ const API_BASE = import.meta.env.VITE_API_BASE || '';
 const apiClient = axios.create({
   baseURL: API_BASE,
   headers: { 'Content-Type': 'application/json' },
+  withCredentials: true, // Required for HttpOnly cookies
 });
 
 // Attach JWT token to every request
-apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+
 
 // ── Auth ──────────────────────────────────────────────────────────────
 
@@ -37,7 +32,27 @@ const register = async (name, email, password, role) => {
   return res.data;
 };
 
-const getMe = async () => {
+
+const logout = async () => {
+  const res = await apiClient.post('/api/auth/logout');
+  return res.data;
+};
+
+const verifyEmail = async (token) => {
+  const res = await apiClient.post('/api/auth/verify-email', { token });
+  return res.data;
+};
+
+const forgotPassword = async (email) => {
+  const res = await apiClient.post('/api/auth/forgot-password', { email });
+  return res.data;
+};
+
+const resetPassword = async (token, password) => {
+  const res = await apiClient.post('/api/auth/reset-password', { token, password });
+  return res.data;
+};
+\nconst getMe = async () => {
   const res = await apiClient.get('/api/auth/me');
   return res.data.user;
 };
@@ -164,7 +179,7 @@ const getCrops = async () => {
 export default {
   login,
   register,
-  getMe,
+  getMe,\n  logout,\n  verifyEmail,\n  forgotPassword,\n  resetPassword,
   getFields,
   createField,
   getField,

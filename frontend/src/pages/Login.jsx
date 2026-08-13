@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { Droplet } from 'lucide-react';
@@ -16,7 +16,7 @@ export default function Login() {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError('Failed to sign in. Please check your credentials.');
+      setError(err.response?.data?.error || 'Invalid email or password.');
     }
   };
 
@@ -44,7 +44,10 @@ export default function Login() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <div className="flex justify-between items-center">
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <Link to="/forgot-password" className="text-xs text-blue-600 hover:text-blue-500">Forgot password?</Link>
+            </div>
             <input 
               type="password" 
               required

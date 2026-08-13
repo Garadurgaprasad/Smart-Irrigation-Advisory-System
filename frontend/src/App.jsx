@@ -8,6 +8,9 @@ import FarmerDashboard from './pages/FarmerDashboard';
 import FieldDetail from './pages/FieldDetail';
 import WaterUsageDashboard from './pages/WaterUsageDashboard';
 import AdminPanel from './pages/AdminPanel';
+import VerifyEmail from './pages/VerifyEmail';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { currentUser, role } = useAuth();
@@ -25,6 +28,9 @@ function AppRoutes() {
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-8">
         <Routes>
           <Route path="/login" element={!currentUser ? <Login /> : <Navigate to="/" />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/register" element={!currentUser ? <Register /> : <Navigate to="/" />} />
           
           {/* Farmer Routes */}

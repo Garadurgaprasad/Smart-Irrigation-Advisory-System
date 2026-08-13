@@ -12,19 +12,12 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const userData = await api.getMe();
-          setCurrentUser(userData);
-          setRole(userData.role || 'farmer');
-        } catch (e) {
-          console.error("Error fetching me", e);
-          localStorage.removeItem('token');
-          setCurrentUser(null);
-          setRole(null);
-        }
-      } else {
+      try {
+        const userData = await api.getMe();
+        setCurrentUser(userData);
+        setRole(userData.role || 'farmer');
+      } catch (e) {
+        // Not logged in or cookie expired
         setCurrentUser(null);
         setRole(null);
       }
@@ -36,20 +29,21 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const data = await api.login(email, password);
-    localStorage.setItem('token', data.token);
     setCurrentUser(data.user);
     setRole(data.user.role || 'farmer');
   };
 
   const register = async (name, email, password, roleInput) => {
-    const data = await api.register(name, email, password, roleInput);
-    localStorage.setItem('token', data.token);
-    setCurrentUser(data.user);
-    setRole(data.user.role || 'farmer');
+    await api.register(name, email, password, roleInput);
+    // Do NOT log them in automatically, they must verify their email first!
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
+  const logout = async () => {
+    try {
+      await api.logout();
+    } catch (e) {
+      console.error(e);
+    }
     setCurrentUser(null);
     setRole(null);
   };
