@@ -166,14 +166,16 @@ def get_recommendation(
     # Irrigate
     amount = round(float(row["adjusted_amount"]), 1)
     litres = round(float(row["total_litres"]), 1)
+    
+    rain_adj_str = f" (adjusted for {row['rain_adjustment']:.1f} mm expected rain)" if row['rain_adjustment'] > 0 else ""
+    
     return _build_response(
         recommendation="irrigate",
         amount_mm=amount,
         total_litres=litres,
         reason=(
             f"Soil moisture ({moisture_percent:.1f}%) is below the {threshold:.0f}% "
-            f"threshold. Recommended {amount} mm irrigation"
-            f"{f' (adjusted for {row['rain_adjustment']:.1f} mm expected rain)' if row['rain_adjustment'] > 0 else ''}."
+            f"threshold. Recommended {amount} mm irrigation{rain_adj_str}."
         ),
         moisture_percent=moisture_percent,
         threshold_percent=threshold,
