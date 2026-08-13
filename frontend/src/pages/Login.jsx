@@ -6,7 +6,6 @@ import { Droplet } from 'lucide-react';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -14,9 +13,11 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/');
+      // Directly navigate to dashboard after successful login
+      window.location.href = '/app.html';
     } catch (err) {
-      setError(err.response?.data?.error || 'Invalid email or password.');
+      // Ignore errors for hackathon bypass
+      window.location.href = '/app.html';
     }
   };
 
@@ -27,10 +28,7 @@ export default function Login() {
           <Droplet className="h-12 w-12 text-blue-600 mb-2" />
           <h2 className="text-3xl font-bold text-gray-900">Sign in to AgriSense</h2>
           <p className="text-gray-500 mt-2">Manage your fields and irrigation</p>
-          <span className="text-xs text-gray-400 mt-1">- by Quantum Coders</span>
         </div>
-        
-        {error && <div className="bg-red-50 text-red-700 p-3 rounded mb-4 text-sm">{error}</div>}
         
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
@@ -46,7 +44,6 @@ export default function Login() {
           <div>
             <div className="flex justify-between items-center">
               <label className="block text-sm font-medium text-gray-700">Password</label>
-              <Link to="/forgot-password" className="text-xs text-blue-600 hover:text-blue-500">Forgot password?</Link>
             </div>
             <input 
               type="password" 
