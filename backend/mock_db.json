@@ -13,6 +13,14 @@
       "role": "admin",
       "password_hash": "scrypt:32768:8:1$xox4hmTm4KwkeJuV$02fe0eb5c9112c05f8687aef9d94d343ab6463394a37d3b9798109d604e58c8fe4cd10efc6357c26c801a252aec43fbec4e04cee005cddbe2f53b59c4bbf2ae6",
       "created_at": "2026-05-15T17:24:20.411410+00:00"
+    },
+    "78d73927-766a-4dc0-9bee-d701e1d3ba14": {
+      "email": "testuser@agrisense.test",
+      "name": "Test User",
+      "role": "farmer",
+      "password_hash": "scrypt:32768:8:1$t5X7JIzPKlaHYA7L$52a62d7d6192de68fda1c1e939a75ae445bf109f182df41c7024e40091672877ab4df018125ba6998f944698c2b31d76198196518b59671a830d1ddf7a45ca6c",
+      "email_verified": true,
+      "created_at": "2026-08-13T09:43:47.833593+00:00"
     }
   },
   "fields": {
@@ -1005,5 +1013,6 @@
       "updated_by": "admin@demo.com",
       "updated_at": "2026-07-14T14:37:20.412371+00:00"
     }
-  }
+  },
+  "verification_tokens": {}
 }

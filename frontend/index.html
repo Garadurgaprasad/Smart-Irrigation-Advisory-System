@@ -12054,7 +12054,16 @@ a[aria-label="Fairventures Agroforestry Logo"]::after {
             }
         }
         
-        // Find the top-left logo reliably using bounding rects
+
+        // Hide Portfolio, Team, and News links
+        document.querySelectorAll('a[href*="portfolio"], a[href*="team"], a[href*="news"]').forEach(el => {
+            el.style.display = 'none';
+            // If the element has a parent wrapper that is now empty, hide it too
+            if (el.parentElement && el.parentElement.children.length === 1) {
+                el.parentElement.style.display = 'none';
+            }
+        });
+\n        // Find the top-left logo reliably using bounding rects
         document.querySelectorAll('svg, img').forEach(el => {
             const rect = el.getBoundingClientRect();
             // If it's in the top left corner (header) and it's a prominent element
