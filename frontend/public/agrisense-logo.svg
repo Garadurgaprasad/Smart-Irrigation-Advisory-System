@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 80" width="100%" height="100%">
+  <path d="M 35,65 C 15,65 15,35 35,15 C 55,35 55,65 35,65 Z" fill="#86efac" />
+  <path d="M 35,15 C 65,5 75,25 55,45 C 45,55 35,45 35,15 Z" fill="#22c55e" />
+  <text x="85" y="46" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="900" fill="#ffffff">Agri<tspan fill="#4ade80">Sense</tspan></text>
+  <text x="87" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#d1d5db" letter-spacing="2">BY QUANTUM CODERS</text>
+</svg>

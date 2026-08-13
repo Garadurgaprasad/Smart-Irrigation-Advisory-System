@@ -1,0 +1,8 @@
+/*
+ * Plus (hero-icons/Plus@0.0.28)
+ *
+ * Learn More: https://www.framer.com/asset-urls
+ */
+
+export * from "https://framerusercontent.com/modules/32MW0jUs8h4eBb9jDIrG/Ugk28JXb2bPAZazgywGr/Plus.js"
+export { default } from "https://framerusercontent.com/modules/32MW0jUs8h4eBb9jDIrG/Ugk28JXb2bPAZazgywGr/Plus.js"

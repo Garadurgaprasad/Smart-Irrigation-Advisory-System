@@ -1,0 +1,1009 @@
+{
+  "users": {
+    "5e77fe2a-16cc-4cb0-9c95-2a108382d964": {
+      "email": "farmer@demo.com",
+      "name": "Ravi Kumar",
+      "role": "farmer",
+      "password_hash": "scrypt:32768:8:1$YHbanFvZ4J2N6OOt$c51c47b99817b71fd94a0351d6b4dae64925fd8869da20b9e84e29c1ac69026d21d35ade286572dfe274a88ff5ea6ff6793ac47ce50bc7b9a6bab776b16d3db7",
+      "created_at": "2026-06-15T02:20:20.322566+00:00"
+    },
+    "909ac096-5f51-42e7-902c-560d7905cf68": {
+      "email": "admin@demo.com",
+      "name": "Dr. Priya Sharma",
+      "role": "admin",
+      "password_hash": "scrypt:32768:8:1$xox4hmTm4KwkeJuV$02fe0eb5c9112c05f8687aef9d94d343ab6463394a37d3b9798109d604e58c8fe4cd10efc6357c26c801a252aec43fbec4e04cee005cddbe2f53b59c4bbf2ae6",
+      "created_at": "2026-05-15T17:24:20.411410+00:00"
+    }
+  },
+  "fields": {
+    "075dd9ab-ebb0-4552-a343-31bbd44f8306": {
+      "name": "Paddy Field North",
+      "crop_type": "Rice",
+      "area_acres": 2.5,
+      "current_growth_stage": "Vegetative",
+      "location": "Vijayawada",
+      "soil_type": "Clay Loam",
+      "user_id": "5e77fe2a-16cc-4cb0-9c95-2a108382d964",
+      "created_at": "2026-06-29T22:29:20.411513+00:00"
+    },
+    "0cc8daf7-3017-4ffd-a668-83dd1105625d": {
+      "name": "Maize Plot East",
+      "crop_type": "Maize",
+      "area_acres": 1.8,
+      "current_growth_stage": "Flowering",
+      "location": "Guntur",
+      "soil_type": "Sandy Loam",
+      "user_id": "5e77fe2a-16cc-4cb0-9c95-2a108382d964",
+      "created_at": "2026-07-04T19:00:20.411522+00:00"
+    },
+    "ddfe46b4-b025-4d2e-abe9-d83a00e20e37": {
+      "name": "Chili Garden",
+      "crop_type": "Chili",
+      "area_acres": 1.2,
+      "current_growth_stage": "Vegetative",
+      "location": "Vizag",
+      "soil_type": "Red Soil",
+      "user_id": "5e77fe2a-16cc-4cb0-9c95-2a108382d964",
+      "created_at": "2026-07-09T17:28:20.411526+00:00"
+    }
+  },
+  "moisture_logs": {
+    "075dd9ab-ebb0-4552-a343-31bbd44f8306": [
+      {
+        "id": "86661b02-fa95-494a-8544-fec74af04a40",
+        "moisture_percent": 57.2,
+        "source": "sensor",
+        "timestamp": "2026-07-24T16:41:20.411564+00:00"
+      },
+      {
+        "id": "0c73726f-4a03-46e3-bc90-7d77aa70527a",
+        "moisture_percent": 54.5,
+        "source": "sensor",
+        "timestamp": "2026-07-25T20:06:20.411575+00:00"
+      },
+      {
+        "id": "7fd2beb7-288e-46a5-96c4-7e31516faeb1",
+        "moisture_percent": 61.4,
+        "source": "sensor",
+        "timestamp": "2026-07-27T02:56:20.411583+00:00"
+      },
+      {
+        "id": "33e2075c-c254-47ca-adf7-c043ca77753d",
+        "moisture_percent": 68.0,
+        "source": "sensor",
+        "timestamp": "2026-07-28T02:30:20.411592+00:00"
+      },
+      {
+        "id": "ed5df3c6-eac3-4be9-ad29-bff3a5644623",
+        "moisture_percent": 71.8,
+        "source": "sensor",
+        "timestamp": "2026-07-28T14:15:20.411598+00:00"
+      },
+      {
+        "id": "3408b73b-2f1c-41f4-842c-52e83dd608d9",
+        "moisture_percent": 76.3,
+        "source": "sensor",
+        "timestamp": "2026-07-29T16:16:20.411604+00:00"
+      },
+      {
+        "id": "5a1cccde-2a82-4749-9d66-960f787b7782",
+        "moisture_percent": 82.2,
+        "source": "sensor",
+        "timestamp": "2026-07-31T01:24:20.411610+00:00"
+      },
+      {
+        "id": "ae6d9a90-7d04-4282-9eb4-43d662818c47",
+        "moisture_percent": 85,
+        "source": "manual",
+        "timestamp": "2026-08-01T01:16:20.411617+00:00"
+      },
+      {
+        "id": "3d936efa-1fb4-41ed-9fc8-5b3ccf506949",
+        "moisture_percent": 85,
+        "source": "sensor",
+        "timestamp": "2026-08-01T20:43:20.411623+00:00"
+      },
+      {
+        "id": "a5540ff7-1e9e-4e79-8708-f605b9e4c45f",
+        "moisture_percent": 80.9,
+        "source": "manual",
+        "timestamp": "2026-08-03T02:27:20.411629+00:00"
+      },
+      {
+        "id": "413fa7de-d504-4c15-bfa0-685d1bba9ddb",
+        "moisture_percent": 83.6,
+        "source": "sensor",
+        "timestamp": "2026-08-04T01:26:20.411635+00:00"
+      },
+      {
+        "id": "e0585f00-f798-43e6-86f2-8d2c5630110a",
+        "moisture_percent": 85,
+        "source": "sensor",
+        "timestamp": "2026-08-04T19:56:20.411641+00:00"
+      },
+      {
+        "id": "a2cd2a59-9f2d-4b41-838f-5242c24e1cce",
+        "moisture_percent": 81.0,
+        "source": "sensor",
+        "timestamp": "2026-08-05T21:33:20.411646+00:00"
+      },
+      {
+        "id": "d5d1be11-2e63-4dbd-8588-7efb0ac76839",
+        "moisture_percent": 81.5,
+        "source": "sensor",
+        "timestamp": "2026-08-06T14:43:20.411652+00:00"
+      },
+      {
+        "id": "a8edef0b-4397-4b40-b003-772deed36c95",
+        "moisture_percent": 78.3,
+        "source": "sensor",
+        "timestamp": "2026-08-07T18:27:20.411657+00:00"
+      },
+      {
+        "id": "cf2214f9-f961-496c-b6b7-012b75fde31a",
+        "moisture_percent": 85,
+        "source": "sensor",
+        "timestamp": "2026-08-09T00:27:20.411662+00:00"
+      },
+      {
+        "id": "e6392059-7c72-45c5-8960-4a145c7ba210",
+        "moisture_percent": 85,
+        "source": "sensor",
+        "timestamp": "2026-08-09T16:40:20.411668+00:00"
+      },
+      {
+        "id": "3c62dece-8507-49de-9f05-3efbaeb2dad8",
+        "moisture_percent": 85,
+        "source": "sensor",
+        "timestamp": "2026-08-11T00:19:20.411673+00:00"
+      },
+      {
+        "id": "dab11d52-3d28-449d-951b-be448a282808",
+        "moisture_percent": 85,
+        "source": "sensor",
+        "timestamp": "2026-08-11T18:09:20.411678+00:00"
+      },
+      {
+        "id": "875cd9c7-3c48-4424-8cbb-a2e20cf376a8",
+        "moisture_percent": 84.3,
+        "source": "sensor",
+        "timestamp": "2026-08-12T20:33:20.411683+00:00"
+      }
+    ],
+    "0cc8daf7-3017-4ffd-a668-83dd1105625d": [
+      {
+        "id": "e26c8b3b-1c92-403e-be24-6809cd0ea553",
+        "moisture_percent": 50.5,
+        "source": "sensor",
+        "timestamp": "2026-07-24T23:30:20.411690+00:00"
+      },
+      {
+        "id": "2ea917dc-ac34-42f5-8c77-1e9d6545e1fc",
+        "moisture_percent": 53.6,
+        "source": "sensor",
+        "timestamp": "2026-07-25T15:51:20.411695+00:00"
+      },
+      {
+        "id": "57d8736c-5b72-45fc-b4b9-5fe109536a56",
+        "moisture_percent": 53.2,
+        "source": "sensor",
+        "timestamp": "2026-07-27T00:07:20.411701+00:00"
+      },
+      {
+        "id": "2bbfcc9d-277b-4153-bacb-3e8dc982e3a6",
+        "moisture_percent": 54.0,
+        "source": "manual",
+        "timestamp": "2026-07-27T19:08:20.411706+00:00"
+      },
+      {
+        "id": "c393aa2b-73bf-4fb1-82b9-ad29ae37747d",
+        "moisture_percent": 53.2,
+        "source": "manual",
+        "timestamp": "2026-07-28T23:44:20.411711+00:00"
+      },
+      {
+        "id": "3bb321cf-01bc-4f61-b85a-e2ec7848ee28",
+        "moisture_percent": 54.4,
+        "source": "sensor",
+        "timestamp": "2026-07-29T22:21:20.411717+00:00"
+      },
+      {
+        "id": "9c9dc9d3-5815-471d-bbba-4d17b3d27ea0",
+        "moisture_percent": 49.7,
+        "source": "sensor",
+        "timestamp": "2026-07-30T19:44:20.411722+00:00"
+      },
+      {
+        "id": "72d6c70c-864f-4445-9a46-5e6cbb723c66",
+        "moisture_percent": 47.5,
+        "source": "sensor",
+        "timestamp": "2026-07-31T14:33:20.411727+00:00"
+      },
+      {
+        "id": "049eaae0-ccb0-4f72-ab18-ec634921321e",
+        "moisture_percent": 44.9,
+        "source": "sensor",
+        "timestamp": "2026-08-01T19:34:20.411733+00:00"
+      },
+      {
+        "id": "2c038e3d-6685-41e3-8a02-8a8dbd4bd34f",
+        "moisture_percent": 40.2,
+        "source": "sensor",
+        "timestamp": "2026-08-03T00:05:20.411738+00:00"
+      },
+      {
+        "id": "d4667fea-9751-4b89-8f4f-ba9b21c33aef",
+        "moisture_percent": 41.2,
+        "source": "manual",
+        "timestamp": "2026-08-03T16:30:20.411743+00:00"
+      },
+      {
+        "id": "3fa1ebba-e319-485a-a973-88c6b2af23af",
+        "moisture_percent": 48.0,
+        "source": "sensor",
+        "timestamp": "2026-08-05T02:04:20.411748+00:00"
+      },
+      {
+        "id": "7447a5b3-6f13-4e21-8f74-1dbe141e4780",
+        "moisture_percent": 53.7,
+        "source": "manual",
+        "timestamp": "2026-08-05T20:46:20.411753+00:00"
+      },
+      {
+        "id": "5c3704a3-016e-4458-b450-7a70f3674be0",
+        "moisture_percent": 53.8,
+        "source": "manual",
+        "timestamp": "2026-08-06T22:03:20.411759+00:00"
+      },
+      {
+        "id": "7a712187-a76e-4fb6-b958-f4c47f659936",
+        "moisture_percent": 54.3,
+        "source": "manual",
+        "timestamp": "2026-08-07T14:22:20.411765+00:00"
+      },
+      {
+        "id": "e03fc774-1e15-40ef-b066-727a818cfcb7",
+        "moisture_percent": 62.1,
+        "source": "sensor",
+        "timestamp": "2026-08-08T21:27:20.411770+00:00"
+      },
+      {
+        "id": "0e5e9f9e-dc34-44db-bfa7-e345c17c617b",
+        "moisture_percent": 61.8,
+        "source": "manual",
+        "timestamp": "2026-08-09T21:30:20.411775+00:00"
+      },
+      {
+        "id": "86785ab9-1fc3-4146-bd8a-6876f7bcbf4e",
+        "moisture_percent": 61.2,
+        "source": "sensor",
+        "timestamp": "2026-08-11T00:03:20.411780+00:00"
+      },
+      {
+        "id": "be3dc762-25fd-4331-a9ab-fb6239185b3e",
+        "moisture_percent": 68.9,
+        "source": "sensor",
+        "timestamp": "2026-08-11T18:58:20.411791+00:00"
+      },
+      {
+        "id": "1e9ce643-e6cc-4292-9691-90b6598e2fe4",
+        "moisture_percent": 71.5,
+        "source": "sensor",
+        "timestamp": "2026-08-13T01:30:20.411796+00:00"
+      }
+    ],
+    "ddfe46b4-b025-4d2e-abe9-d83a00e20e37": [
+      {
+        "id": "cb3a72ea-822d-4290-99bf-babc4fcf1c14",
+        "moisture_percent": 48.1,
+        "source": "sensor",
+        "timestamp": "2026-07-24T14:22:20.411802+00:00"
+      },
+      {
+        "id": "9f6f791d-8a9f-4362-8028-c3b3ef5b54a2",
+        "moisture_percent": 51.9,
+        "source": "sensor",
+        "timestamp": "2026-07-25T17:31:20.411807+00:00"
+      },
+      {
+        "id": "82f70f02-abb3-42bc-b057-ba6d9cf38704",
+        "moisture_percent": 48.8,
+        "source": "manual",
+        "timestamp": "2026-07-26T22:19:20.411812+00:00"
+      },
+      {
+        "id": "9ba7d0a4-bb0c-450c-a7b1-e123c21e26d8",
+        "moisture_percent": 56.3,
+        "source": "manual",
+        "timestamp": "2026-07-27T23:53:20.411817+00:00"
+      },
+      {
+        "id": "8fc4573e-67b1-46c0-9998-e8a3fefb1c1a",
+        "moisture_percent": 53.4,
+        "source": "sensor",
+        "timestamp": "2026-07-28T20:30:20.411822+00:00"
+      },
+      {
+        "id": "2fc2a417-c773-49ab-b5f7-d095b0fd8d88",
+        "moisture_percent": 52.5,
+        "source": "sensor",
+        "timestamp": "2026-07-30T01:13:20.411827+00:00"
+      },
+      {
+        "id": "d2a3176a-e714-4cef-b006-328caf5f1c82",
+        "moisture_percent": 51.0,
+        "source": "sensor",
+        "timestamp": "2026-07-31T02:08:20.411832+00:00"
+      },
+      {
+        "id": "c4b6d6cf-a4e8-4669-b7af-7235044b43de",
+        "moisture_percent": 53.0,
+        "source": "sensor",
+        "timestamp": "2026-07-31T15:40:20.411837+00:00"
+      },
+      {
+        "id": "1190e0b5-d5fc-48b5-86ce-f0ca90aad004",
+        "moisture_percent": 51.0,
+        "source": "sensor",
+        "timestamp": "2026-08-01T18:14:20.411843+00:00"
+      },
+      {
+        "id": "18ad5b02-ce4d-44fd-955d-96e11c6e8f1a",
+        "moisture_percent": 57.3,
+        "source": "sensor",
+        "timestamp": "2026-08-02T16:05:20.411848+00:00"
+      },
+      {
+        "id": "d8627264-3459-4949-bfb7-411b692b525d",
+        "moisture_percent": 63.8,
+        "source": "sensor",
+        "timestamp": "2026-08-03T19:07:20.411853+00:00"
+      },
+      {
+        "id": "4763b8cc-b0dd-44e7-b3e9-7f02835b342b",
+        "moisture_percent": 59.4,
+        "source": "sensor",
+        "timestamp": "2026-08-04T16:18:20.411858+00:00"
+      },
+      {
+        "id": "46e7dc1b-2ef0-41a5-b435-52be63785ad5",
+        "moisture_percent": 64.5,
+        "source": "sensor",
+        "timestamp": "2026-08-06T02:31:20.411863+00:00"
+      },
+      {
+        "id": "47cf2a58-855f-4a57-9d93-a8344ade780b",
+        "moisture_percent": 62.8,
+        "source": "manual",
+        "timestamp": "2026-08-06T23:51:20.411868+00:00"
+      },
+      {
+        "id": "fb1bf0f8-eb22-4724-a4c1-e4aaaa0d03c2",
+        "moisture_percent": 65.5,
+        "source": "sensor",
+        "timestamp": "2026-08-07T19:38:20.411873+00:00"
+      },
+      {
+        "id": "eb889be5-02c2-4526-bc13-7ff5be8a2089",
+        "moisture_percent": 70.2,
+        "source": "sensor",
+        "timestamp": "2026-08-08T14:43:20.411878+00:00"
+      },
+      {
+        "id": "f06a5a46-4f95-433d-b27d-bc34221faad1",
+        "moisture_percent": 65.3,
+        "source": "manual",
+        "timestamp": "2026-08-09T22:08:20.411884+00:00"
+      },
+      {
+        "id": "9b3488c2-a4ff-4cd9-a4e3-faeeb8c76c29",
+        "moisture_percent": 72.9,
+        "source": "sensor",
+        "timestamp": "2026-08-10T15:37:20.411889+00:00"
+      },
+      {
+        "id": "e021f411-0a9d-4989-8fbe-ac527ac2f37b",
+        "moisture_percent": 78.2,
+        "source": "manual",
+        "timestamp": "2026-08-11T23:29:20.411894+00:00"
+      },
+      {
+        "id": "cd5bc530-ed74-414b-9543-bf17f484613c",
+        "moisture_percent": 79.7,
+        "source": "sensor",
+        "timestamp": "2026-08-12T16:40:20.411899+00:00"
+      }
+    ]
+  },
+  "irrigation_logs": {
+    "075dd9ab-ebb0-4552-a343-31bbd44f8306": [
+      {
+        "id": "deb00f06-eecb-491e-b35d-527496fe017d",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 5.7,
+        "actual_amount_mm": 7.1,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-07-30T23:55:20.411909+00:00",
+        "logged_at": "2026-07-30T15:01:20.411912+00:00"
+      },
+      {
+        "id": "47e5942d-41b2-4553-bbd6-134124f4a77d",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 9.0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-07-31T16:17:20.411919+00:00",
+        "logged_at": "2026-07-31T14:18:20.411922+00:00"
+      },
+      {
+        "id": "bed32769-e4c4-4f8e-8348-42214c57b033",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-01T15:53:20.411927+00:00",
+        "logged_at": "2026-08-01T18:25:20.411931+00:00"
+      },
+      {
+        "id": "a7936439-715a-426d-aa1d-f9452e9ca566",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-02T20:04:20.411936+00:00",
+        "logged_at": "2026-08-03T00:32:20.411950+00:00"
+      },
+      {
+        "id": "40915807-961a-485a-8268-d9161716431d",
+        "recommendation": "wait",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0.0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-04T02:01:20.411960+00:00",
+        "logged_at": "2026-08-03T14:35:20.411963+00:00"
+      },
+      {
+        "id": "8e85a835-454e-485c-87a1-bbe8a13f318a",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 11.1,
+        "actual_amount_mm": 10.1,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-04T22:55:20.411970+00:00",
+        "logged_at": "2026-08-04T18:05:20.411974+00:00"
+      },
+      {
+        "id": "a398e20d-a325-43d4-961c-981385d6ee82",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 14.0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-06T00:14:20.411980+00:00",
+        "logged_at": "2026-08-05T20:10:20.411983+00:00"
+      },
+      {
+        "id": "78b29e08-fccc-476b-84e8-44e625b61412",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 9.9,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-06T17:26:20.411989+00:00",
+        "logged_at": "2026-08-06T20:15:20.411992+00:00"
+      },
+      {
+        "id": "16926bc3-11ba-4122-b4f3-16f690dca7e6",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 12.5,
+        "actual_amount_mm": 9.8,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-08T01:00:20.411998+00:00",
+        "logged_at": "2026-08-08T03:04:20.412001+00:00"
+      },
+      {
+        "id": "a9757fa6-e8c4-4730-a0d5-a87e535ec322",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-08T15:49:20.412005+00:00",
+        "logged_at": "2026-08-08T18:38:20.412008+00:00"
+      },
+      {
+        "id": "743e7f97-fd0a-49c2-a342-e278fc57940a",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-09T23:36:20.412013+00:00",
+        "logged_at": "2026-08-10T01:03:20.412015+00:00"
+      },
+      {
+        "id": "4bd523cc-4e18-4e55-ac4d-6152d52fbb81",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 6.0,
+        "actual_amount_mm": 6.2,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-10T19:50:20.412022+00:00",
+        "logged_at": "2026-08-11T00:21:20.412024+00:00"
+      },
+      {
+        "id": "f4af9fd7-cb14-483d-ae7b-f1ac382f9ee5",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-11T18:18:20.412029+00:00",
+        "logged_at": "2026-08-12T03:02:20.412032+00:00"
+      },
+      {
+        "id": "843fdce7-ed9d-4dc7-8192-c897211bd8a2",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-12T17:34:20.412037+00:00",
+        "logged_at": "2026-08-12T19:57:20.412039+00:00"
+      }
+    ],
+    "0cc8daf7-3017-4ffd-a668-83dd1105625d": [
+      {
+        "id": "393045a6-0621-4c84-82c4-3896047f3597",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-07-31T01:12:20.412045+00:00",
+        "logged_at": "2026-07-30T17:21:20.412047+00:00"
+      },
+      {
+        "id": "4025d060-074a-4d82-b112-7aa6d61eea0e",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 10.7,
+        "actual_amount_mm": 12.1,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-07-31T14:31:20.412053+00:00",
+        "logged_at": "2026-07-31T16:46:20.412056+00:00"
+      },
+      {
+        "id": "3632a62b-5f9c-42d3-ba8d-81597e91b962",
+        "recommendation": "wait",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0.0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-02T02:11:20.412062+00:00",
+        "logged_at": "2026-08-01T16:29:20.412064+00:00"
+      },
+      {
+        "id": "64cbb401-2859-48e3-b49f-5dde2e8c7314",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-02T19:56:20.412070+00:00",
+        "logged_at": "2026-08-03T01:39:20.412072+00:00"
+      },
+      {
+        "id": "3a95dec3-9f80-47c3-b835-11ea3fcea9cd",
+        "recommendation": "wait",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0.0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-03T18:32:20.412079+00:00",
+        "logged_at": "2026-08-03T16:06:20.412081+00:00"
+      },
+      {
+        "id": "3ba79912-a3ee-4837-b117-1e2db1281ea4",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 12.2,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-04T22:22:20.412087+00:00",
+        "logged_at": "2026-08-04T19:13:20.412090+00:00"
+      },
+      {
+        "id": "9e2c10cf-cc1a-444d-a868-7e7319d6ef1c",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 13.6,
+        "actual_amount_mm": 16.0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-05T15:20:20.412097+00:00",
+        "logged_at": "2026-08-05T16:00:20.412100+00:00"
+      },
+      {
+        "id": "25a696ce-e2a1-4da8-9f1f-a9af827fa945",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-06T14:20:20.412106+00:00",
+        "logged_at": "2026-08-07T01:43:20.412108+00:00"
+      },
+      {
+        "id": "e1d35e5d-024b-4c6a-9fd8-a515574c835f",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 12.1,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-08T00:09:20.412114+00:00",
+        "logged_at": "2026-08-08T00:02:20.412117+00:00"
+      },
+      {
+        "id": "01f6ea7c-1fc1-4cdc-b289-882ea0993df5",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-08T15:43:20.412122+00:00",
+        "logged_at": "2026-08-08T14:37:20.412124+00:00"
+      },
+      {
+        "id": "82571b39-33b7-431d-8a01-f68d68573152",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 8.1,
+        "actual_amount_mm": 6.2,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-09T17:06:20.412130+00:00",
+        "logged_at": "2026-08-09T16:58:20.412133+00:00"
+      },
+      {
+        "id": "bf5cc08a-0d37-4236-851a-edf26e01fe2f",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 7.8,
+        "actual_amount_mm": 8.4,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-10T17:10:20.412139+00:00",
+        "logged_at": "2026-08-10T18:23:20.412142+00:00"
+      },
+      {
+        "id": "8edc5fb5-38c9-40dd-b7d7-44941e5c2dcc",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-11T20:58:20.412147+00:00",
+        "logged_at": "2026-08-11T20:18:20.412149+00:00"
+      },
+      {
+        "id": "36efcd49-5441-45f9-be97-96f4e124d1a0",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-13T03:02:20.412154+00:00",
+        "logged_at": "2026-08-12T16:24:20.412157+00:00"
+      }
+    ],
+    "ddfe46b4-b025-4d2e-abe9-d83a00e20e37": [
+      {
+        "id": "87850ca5-5c16-430c-bb33-a53b50752168",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 8.7,
+        "actual_amount_mm": 6.2,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-07-31T00:56:20.412163+00:00",
+        "logged_at": "2026-07-30T23:43:20.412166+00:00"
+      },
+      {
+        "id": "b0305b24-256c-40c6-9283-a4fee7e2262c",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 4.6,
+        "actual_amount_mm": 6.0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-07-31T20:39:20.412172+00:00",
+        "logged_at": "2026-07-31T18:27:20.412175+00:00"
+      },
+      {
+        "id": "c0ac40e5-0067-4b3d-a716-b656279b7233",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 6.7,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-01T23:50:20.412180+00:00",
+        "logged_at": "2026-08-01T22:31:20.412183+00:00"
+      },
+      {
+        "id": "b5a659dc-ec73-4b59-a247-aa6dd46c4e60",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-02T23:18:20.412188+00:00",
+        "logged_at": "2026-08-02T15:02:20.412191+00:00"
+      },
+      {
+        "id": "b453e04f-4b5f-491f-9f9f-5cb21c26013b",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-03T17:44:20.412196+00:00",
+        "logged_at": "2026-08-04T00:04:20.412199+00:00"
+      },
+      {
+        "id": "8d4961d4-c1c0-41f5-b183-29ad621ccfd5",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-04T19:15:20.412204+00:00",
+        "logged_at": "2026-08-04T23:32:20.412206+00:00"
+      },
+      {
+        "id": "66a7f4cd-f77a-404d-b5e1-75d1e3abe323",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-05T22:01:20.412212+00:00",
+        "logged_at": "2026-08-05T23:30:20.412214+00:00"
+      },
+      {
+        "id": "1af8711a-33ef-4f03-9edd-eb05c647dcc7",
+        "recommendation": "irrigate",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 11.4,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-06T19:03:20.412220+00:00",
+        "logged_at": "2026-08-06T19:36:20.412223+00:00"
+      },
+      {
+        "id": "8c7015c1-4a0a-47af-ada3-9dd2cc300df8",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-07T23:32:20.412228+00:00",
+        "logged_at": "2026-08-07T16:11:20.412231+00:00"
+      },
+      {
+        "id": "58677308-c5f7-4842-b2ad-c75f8bd9083e",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-08T17:04:20.412237+00:00",
+        "logged_at": "2026-08-08T15:58:20.412239+00:00"
+      },
+      {
+        "id": "a9178101-2792-4bba-bab9-99972fc63636",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-10T03:03:20.412245+00:00",
+        "logged_at": "2026-08-09T17:07:20.412248+00:00"
+      },
+      {
+        "id": "afa967db-3bc4-4b39-b66c-e51aaa4271ce",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-11T00:44:20.412254+00:00",
+        "logged_at": "2026-08-10T18:58:20.412256+00:00"
+      },
+      {
+        "id": "7a4a1118-d216-41c0-aab7-32f85d2ea032",
+        "recommendation": "irrigate",
+        "action_taken": "irrigated",
+        "recommended_amount_mm": 10.2,
+        "actual_amount_mm": 13.0,
+        "reason": "Soil moisture below threshold",
+        "date": "2026-08-11T20:42:20.412263+00:00",
+        "logged_at": "2026-08-11T17:49:20.412265+00:00"
+      },
+      {
+        "id": "844808a4-f872-4904-9d97-7b85a3b600c3",
+        "recommendation": "wait",
+        "action_taken": "skipped",
+        "recommended_amount_mm": 0,
+        "actual_amount_mm": 0,
+        "reason": "Soil moisture above threshold",
+        "date": "2026-08-13T03:03:20.412270+00:00",
+        "logged_at": "2026-08-13T01:35:20.412273+00:00"
+      }
+    ]
+  },
+  "weather_cache": {},
+  "rules": {
+    "d6711da7-22bf-44fe-8a82-277fc7ef2d7f": {
+      "crop_type": "Rice",
+      "growth_stage": "Germination",
+      "water_requirement_mm_per_day": 8.0,
+      "moisture_threshold_percent": 65.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T23:41:20.412280+00:00"
+    },
+    "c3ad23f5-78be-475c-a73e-eada187c1eaa": {
+      "crop_type": "Rice",
+      "growth_stage": "Vegetative",
+      "water_requirement_mm_per_day": 10.0,
+      "moisture_threshold_percent": 55.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T16:12:20.412286+00:00"
+    },
+    "e6ab3d51-5ce6-466b-a4a2-868090e8a4a8": {
+      "crop_type": "Rice",
+      "growth_stage": "Flowering",
+      "water_requirement_mm_per_day": 12.0,
+      "moisture_threshold_percent": 60.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-15T01:02:20.412290+00:00"
+    },
+    "e6718299-021d-452d-a257-aaad4e210e39": {
+      "crop_type": "Rice",
+      "growth_stage": "Maturity",
+      "water_requirement_mm_per_day": 6.0,
+      "moisture_threshold_percent": 45.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T21:17:20.412295+00:00"
+    },
+    "ceadca83-35f1-4103-b5de-1b2a14d7de7c": {
+      "crop_type": "Maize",
+      "growth_stage": "Germination",
+      "water_requirement_mm_per_day": 6.0,
+      "moisture_threshold_percent": 55.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T22:03:20.412299+00:00"
+    },
+    "026360e5-e83d-48f3-aec0-85e96932c500": {
+      "crop_type": "Maize",
+      "growth_stage": "Vegetative",
+      "water_requirement_mm_per_day": 8.0,
+      "moisture_threshold_percent": 50.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T21:29:20.412304+00:00"
+    },
+    "b7334dbe-6b3f-47d6-b392-38f9b7c3d8b7": {
+      "crop_type": "Maize",
+      "growth_stage": "Flowering",
+      "water_requirement_mm_per_day": 10.0,
+      "moisture_threshold_percent": 55.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-15T02:08:20.412310+00:00"
+    },
+    "c9c10312-3f99-47fc-9871-296edf1753fa": {
+      "crop_type": "Maize",
+      "growth_stage": "Maturity",
+      "water_requirement_mm_per_day": 5.0,
+      "moisture_threshold_percent": 40.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T15:21:20.412314+00:00"
+    },
+    "553b9c32-b55c-4254-b2c9-881fe5c282f9": {
+      "crop_type": "Chili",
+      "growth_stage": "Germination",
+      "water_requirement_mm_per_day": 5.0,
+      "moisture_threshold_percent": 60.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T14:26:20.412319+00:00"
+    },
+    "345890ca-32e7-41ce-a2bb-c9066aecf70f": {
+      "crop_type": "Chili",
+      "growth_stage": "Vegetative",
+      "water_requirement_mm_per_day": 7.0,
+      "moisture_threshold_percent": 50.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-15T01:49:20.412323+00:00"
+    },
+    "aeee702b-b6ef-41e9-aa1a-b156c8b40e49": {
+      "crop_type": "Chili",
+      "growth_stage": "Flowering",
+      "water_requirement_mm_per_day": 9.0,
+      "moisture_threshold_percent": 55.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T19:23:20.412328+00:00"
+    },
+    "53085678-5d91-45b6-b35e-584936ce9dc2": {
+      "crop_type": "Chili",
+      "growth_stage": "Maturity",
+      "water_requirement_mm_per_day": 4.0,
+      "moisture_threshold_percent": 40.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T19:47:20.412333+00:00"
+    },
+    "38f5327d-9dbb-43fc-892e-5c15c55edeb6": {
+      "crop_type": "Cotton",
+      "growth_stage": "Germination",
+      "water_requirement_mm_per_day": 5.5,
+      "moisture_threshold_percent": 55.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-15T01:39:20.412338+00:00"
+    },
+    "232607cd-143b-49a0-b62f-8980656a1aea": {
+      "crop_type": "Cotton",
+      "growth_stage": "Vegetative",
+      "water_requirement_mm_per_day": 7.5,
+      "moisture_threshold_percent": 48.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T16:59:20.412343+00:00"
+    },
+    "3c9513ff-9a06-4c03-b616-c228f4f09420": {
+      "crop_type": "Cotton",
+      "growth_stage": "Flowering",
+      "water_requirement_mm_per_day": 9.5,
+      "moisture_threshold_percent": 52.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T15:06:20.412348+00:00"
+    },
+    "29802ab7-08e8-4ab3-b303-428975359739": {
+      "crop_type": "Cotton",
+      "growth_stage": "Maturity",
+      "water_requirement_mm_per_day": 4.5,
+      "moisture_threshold_percent": 38.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-15T01:44:20.412353+00:00"
+    },
+    "dc3d1b11-1907-4fb5-b905-b4f806e2d72a": {
+      "crop_type": "Sugarcane",
+      "growth_stage": "Germination",
+      "water_requirement_mm_per_day": 7.0,
+      "moisture_threshold_percent": 60.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T18:43:20.412357+00:00"
+    },
+    "767b6893-e09c-4edf-a65a-d57cfa1ce54f": {
+      "crop_type": "Sugarcane",
+      "growth_stage": "Vegetative",
+      "water_requirement_mm_per_day": 10.0,
+      "moisture_threshold_percent": 55.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T23:44:20.412362+00:00"
+    },
+    "ab68649a-a7ba-427f-af0a-1b8e65df2c3c": {
+      "crop_type": "Sugarcane",
+      "growth_stage": "Flowering",
+      "water_requirement_mm_per_day": 11.0,
+      "moisture_threshold_percent": 58.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T21:20:20.412366+00:00"
+    },
+    "5c2cb9fd-a957-4b94-8bce-3a785759e432": {
+      "crop_type": "Sugarcane",
+      "growth_stage": "Maturity",
+      "water_requirement_mm_per_day": 6.0,
+      "moisture_threshold_percent": 42.0,
+      "updated_by": "admin@demo.com",
+      "updated_at": "2026-07-14T14:37:20.412371+00:00"
+    }
+  }
+}

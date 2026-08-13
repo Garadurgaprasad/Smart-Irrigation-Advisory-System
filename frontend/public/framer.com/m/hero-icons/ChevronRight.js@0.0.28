@@ -1,0 +1,8 @@
+/*
+ * ChevronRight (hero-icons/ChevronRight@0.0.28)
+ *
+ * Learn More: https://www.framer.com/asset-urls
+ */
+
+export * from "https://framerusercontent.com/modules/r3YZHzUwoEYDAtFZpcUe/1zvU1XQ6kn5Jzp9QvyUO/ChevronRight.js"
+export { default } from "https://framerusercontent.com/modules/r3YZHzUwoEYDAtFZpcUe/1zvU1XQ6kn5Jzp9QvyUO/ChevronRight.js"

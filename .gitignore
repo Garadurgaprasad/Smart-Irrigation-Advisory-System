@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+frontend/dist/
+dist-ssr/
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+venv/
+env/
+.env
+.venv/
+functions/venv/
+
+# Firebase & Vercel
+.firebase/
+firebase-export/
+*.log
+.vercel/
+
+# Editor & OS
+.vscode/
+.idea/
+*.sw?
+.DS_Store
+Thumbs.db

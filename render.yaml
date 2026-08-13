@@ -1,0 +1,32 @@
+# render.yaml — Render Deployment Blueprint
+# ═══════════════════════════════════════════
+# Smart Irrigation Advisory System
+#
+# Deploy: Connect this repo to Render → auto-detected via render.yaml
+
+services:
+  - type: web
+    name: smart-irrigation-api
+    runtime: python
+    region: singapore  # Closest to India
+    plan: free
+    
+    buildCommand: |
+      cd backend && pip install -r requirements.txt
+      cd ../frontend && npm install && npm run build
+    
+    startCommand: cd backend && gunicorn app:app --bind 0.0.0.0:$PORT --workers 2
+    
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: NODE_VERSION
+        value: "18"
+    
+    healthCheckPath: /api/health
+    
+    autoDeploy: true
