@@ -1,27 +1,13 @@
-# ── Smart Irrigation Advisory System · Backend Dependencies ──
-# Framework
-flask>=3.0.0
-flask-cors>=4.0.0
-flask-jwt-extended>=4.6.0
-werkzeug>=3.0.0
-gunicorn>=21.2.0
-
-# Firebase
-firebase-admin>=6.2.0
-
-# Data & Analytics (Hackathon Required)
-pandas>=2.1.0
-numpy>=1.26.0
-
-# Visualization (Hackathon Required)
-matplotlib>=3.8.0
-plotly>=5.18.0
-
-# HTTP Client
-requests>=2.31.0
-
-# Password Hashing
-bcrypt>=4.1.0
-
-# Testing
-pytest>=7.4.0
+flask
+flask-cors
+flask-jwt-extended
+werkzeug
+gunicorn
+firebase-admin
+pandas
+numpy
+matplotlib
+plotly
+requests
+bcrypt
+pytest
