@@ -12225,6 +12225,41 @@
     <!-- Start of bodyEnd -->
 
     <!-- End of bodyEnd -->
+<script>
+    let replaceInterval = setInterval(() => {
+        const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        while(node = walk.nextNode()) {
+            if(node.nodeValue.includes('Fairventures Agroforestry')) {
+                node.nodeValue = node.nodeValue.replace(/Fairventures Agroforestry/g, 'Smart Irrigation Advisory System');
+            }
+            if(node.nodeValue.includes('fabionobile.de')) {
+                node.nodeValue = node.nodeValue.replace(/fabionobile\.de/g, 'Quantum Coders');
+            }
+            if(node.nodeValue.includes('Garadurgaprasad')) {
+                node.nodeValue = node.nodeValue.replace(/Garadurgaprasad/g, 'Quantum Coders');
+            }
+            if(node.nodeValue.includes('fairventures agroforestry')) {
+                node.nodeValue = node.nodeValue.replace(/fairventures agroforestry/g, 'Smart Irrigation Advisory System');
+            }
+        }
+        
+        // Find the top-left logo reliably using bounding rects
+        document.querySelectorAll('svg, img').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            // If it's in the top left corner (header) and it's a prominent element
+            if (rect.top >= 0 && rect.top < 100 && rect.left >= 0 && rect.left < 300 && rect.width > 40 && rect.height > 10) {
+                if (!el.hasAttribute('data-agrisense-replaced')) {
+                    el.setAttribute('data-agrisense-replaced', 'true');
+                    el.style.display = 'none';
+                    el.insertAdjacentHTML('afterend', '<div style="display: flex; align-items: center; height: 100%; font-family: Outfit, Inter, sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; z-index: 9999;"><span style="color: #ffffff;">Agri</span><span style="color: #77b42b;">Sense</span></div>');
+                }
+            }
+        });
+    }, 1000);
+    
+    setTimeout(() => { clearInterval(replaceInterval); }, 10000);
+</script>
 </body>
 
 </html>
