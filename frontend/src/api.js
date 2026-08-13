@@ -52,7 +52,7 @@ const resetPassword = async (token, password) => {
   const res = await apiClient.post('/api/auth/reset-password', { token, password });
   return res.data;
 };
-\nconst getMe = async () => {
+const getMe = async () => {
   const res = await apiClient.get('/api/auth/me');
   return res.data.user;
 };
@@ -179,7 +179,11 @@ const getCrops = async () => {
 export default {
   login,
   register,
-  getMe,\n  logout,\n  verifyEmail,\n  forgotPassword,\n  resetPassword,
+  getMe,
+  logout,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
   getFields,
   createField,
   getField,
